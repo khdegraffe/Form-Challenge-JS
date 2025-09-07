@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1>My Happy Form</h1>
+    <form method="post">
+      <div class="names">
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          placeholder="First Name"
+        />
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          placeholder="Last Name"
+        />
+      </div>
+      <br />
+      <div class="comments">
+        <textarea name="commentArea" id="commentArea"></textarea>
+      </div>
+      <br />
+      <div class="newsletter"></div>
+      <label for="newsletterCheck">Subscribe to newsletter</label>
+      <input type="checkbox" name="newsletterCheck" id="newsletterCheck" />
+      <br />
+      <input
+        type="email"
+        name="emailInput"
+        id="emailInput"
+        placeholder="Enter your email"
+      />
+      <br />
+      <br />
+      <div class="submitDiv">
+        <button id="submitBtn" type="submit">Submit</button>
+      </div>
+    </form>
+    <script src="./app.js"></script>
+  </body>
+</html>

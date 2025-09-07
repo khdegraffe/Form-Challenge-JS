@@ -1,0 +1,5 @@
+#commentArea {
+  min-height: 30px;
+  overflow: hidden;
+  /* resize: horizontal; */
+}
