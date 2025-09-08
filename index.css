@@ -3,3 +3,23 @@
   overflow: hidden;
   /* resize: horizontal; */
 }
+
+#emailInput {
+  display: none;
+}
+
+#message {
+  margin-top: 1rem;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+#message.show {
+  opacity: 1;
+}
+.success {
+  color: green;
+}
+.error {
+  color: red;
+}

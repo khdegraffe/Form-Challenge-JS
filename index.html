@@ -8,42 +8,62 @@
   </head>
   <body>
     <h1>My Happy Form</h1>
-    <form method="post">
-      <div class="names">
-        <input
-          type="text"
-          name="firstName"
-          id="firstName"
-          placeholder="First Name"
-        />
-        <input
-          type="text"
-          name="lastName"
-          id="lastName"
-          placeholder="Last Name"
-        />
-      </div>
-      <br />
-      <div class="comments">
-        <textarea name="commentArea" id="commentArea"></textarea>
-      </div>
-      <br />
-      <div class="newsletter"></div>
-      <label for="newsletterCheck">Subscribe to newsletter</label>
-      <input type="checkbox" name="newsletterCheck" id="newsletterCheck" />
-      <br />
+    <form id="userForm">
+      <label for="firstName">First Name:</label>
       <input
-        type="email"
-        name="emailInput"
-        id="emailInput"
-        placeholder="Enter your email"
+        type="text"
+        name="firstName"
+        id="firstName"
+        placeholder="First Name"
+        required
       />
+
       <br />
       <br />
-      <div class="submitDiv">
-        <button id="submitBtn" type="submit">Submit</button>
+
+      <label for="lastName">Last Name</label>
+      <input
+        type="text"
+        name="lastName"
+        id="lastName"
+        placeholder="Last Name"
+        required
+      />
+
+      <br />
+
+      <br />
+
+      <label for="commentArea">Comments:</label>
+      <textarea name="commentArea" id="commentArea"></textarea>
+
+      <br />
+      <br />
+
+      <label for="subscribe">Subscribe to newsletter</label>
+      <input type="checkbox" name="subscribe" id="subscribe" />
+
+      <br />
+      <br />
+
+      <div id="emailInput">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Enter your email"
+        />
       </div>
+
+      <br />
+      <br />
+
+      <button id="submitBtn" type="submit" disabled>Submit</button>
     </form>
+
+    <div id="message" aria-live="polite"></div>
+
     <script src="./app.js"></script>
   </body>
 </html>

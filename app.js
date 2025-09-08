@@ -1,23 +1,13 @@
+const form = document.querySelector("#userForm");
 const btn = document.querySelector("#submitBtn");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
 const emailInput = document.querySelector("#emailInput");
-const newsletterCheck = document.querySelector("#newsletterCheck");
-const commentSection = document.querySelector("#commentSection");
+const email = document.querySelector("#email");
+const subscribe = document.querySelector("#subscribe");
+const commentArea = document.querySelector("#commentArea");
+const messageDiv = document.querySelector("#message");
 
-//Helper function for after Submit click
-const resetInputs = () => {
-  firstName.toString = "";
-  lastName.toString = "";
-  commentSection.toString = "";
-  newsletterCheck.checked = false;
-  emailInput.toString = "";
-};
-
-//Button Disabled by defauled
-btn.disabled = true;
-
-//Valdiate inputs function to activate our btn if there is an input in both text boxes
 function validateInputs() {
   if (firstName.value.trim() !== "" && lastName.value.trim() !== "") {
     btn.disabled = false;
@@ -26,42 +16,50 @@ function validateInputs() {
   }
 }
 
-emailInput.hidden = true;
-function displayEmail() {
-  if (newsletterCheck.checked === true) {
-    emailInput.hidden = false;
-  } else {
-    emailInput.hidden = true;
-  }
-}
-
-btn.addEventListener("click", () => {
-  e.preventDefault();
-  resetInputs();
-});
-
 firstName.addEventListener("input", validateInputs);
 lastName.addEventListener("input", validateInputs);
-newsletterCheck.addEventListener("click", displayEmail);
 
-const myRequest = new Request("https://jsonplaceholder.typicode.com/", {
-  method: "POST",
-  firstName: `$firstName.value`,
-  lastName: `$lastName.value`,
-  isSubscribed: newsletterCheck.checked,
-  email: (newsletterCheck = on ? `${emailInput}` : ""),
+subscribe.addEventListener("change", () => {
+  emailInput.style.display = subscribe.checked ? "block" : "none";
 });
 
-async function getData() {
-  const url = "https://jsonplaceholder.typicode.com/";
-  try {
-    const response = await fetch(url, { method: "POST" });
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    const result = await response.json();
-    console.log(result);
-  } catch (error) {
-    console.error(error.message);
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  console.log("submit handler triggered");
+
+  //request Object
+  const data = {
+    firstName: firstName.value.trim(),
+    lastName: lastName.value.trim(),
+    isSubscribed: subscribe.checked,
+    comment: commentArea.value.trim(),
+  };
+
+  if (subscribe.checked) {
+    data.email = email.value.trim();
   }
-}
+
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error("Network response was not ok");
+
+    messageDiv.textContent = `Thanks for you submission, ${data.firstName}!`;
+    messageDiv.className = "success show";
+
+    form.reset();
+    emailInput.style.display = "none";
+    btn.disabled = true;
+
+    setTimeout(() => {
+      messageDiv.textContent = "";
+      messageDiv.className = "";
+    }, 2000);
+  } catch (err) {
+    messageDiv.textContent = "Whoops, something went wrong.";
+    messageDiv.className = "error show";
+  }
+});
